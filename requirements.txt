@@ -17,7 +17,7 @@ click
 colorama
 cryptography
 cycler==0.11.0
-Django
+django
 flatbuffers==2.0
 fonttools==4.32.0
 frozenlist
