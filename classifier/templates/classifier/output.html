@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Classifier</title>
+</head>
+<body>
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                <h3>Welcome</h3>
+                        
+                        {% if user.is_authenticated %}
+                        hello, {{ user.first_name }}
+                        <a class="btn btn-primary btn-lg btn-outline-primary" href="{% url 'logout' %}">
+                            Logout
+                        </a>
+                        {% else %}
+                        <p>Login and get started :)</p>
+                        <a class="btn btn-primary btn-lg btn-outline-primary" href="{% url 'login' %}"> Login </a><br/><br/>
+                        <a class="btn btn-primary btn-lg btn-outline-primary" href="{% url 'signup' %}"> Register </a><br/>
+                        {% endif %}
+            </div>
+
+
+           
+            <div class="col-md-9 register-right">
+                <!-- <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
+                    </li> 
+                </ul> -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Skin Cancer Classifier</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <img src="{{ pic.img1.url }}" width="200" height="200">
+                                    <!-- <input type="file" class="form-control" name="filePath"/> -->
+                                </div>
+                               
+                            </div>
+                            <div class="col-md-6">
+                                Type of skin cancer: <input type="email" class="form-control" placeholder="Email *" value="{{ ans }}" disabled />
+                                Accuracy Score: <input type="email" class="form-control" placeholder="Email *" value="{{ score }}" disabled />
+                                <button class="btnRegister" url="{% url 'home' %}"> Go Back<button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        
+
+        </div>
+
+    </div>
+
+</body>
+</html>

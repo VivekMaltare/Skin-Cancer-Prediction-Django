@@ -1,0 +1,86 @@
+{% extends "main/test.html" %}
+{% load static %}
+
+{% block title %} User Information {% endblock title %}
+
+{% block mainblock %}
+    <main class="ps-page--my-account">
+        <div class="ps-breadcrumb">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="user-information.html">Account</a></li>
+                    <li>Invoices</li>
+                </ul>
+            </div>
+        </div>
+        <section class="ps-section--account">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="ps-section__left">
+                            <aside class="ps-widget--account-dashboard">
+                                <div class="ps-widget__header"><img src="img/users/3.jpg" alt="">
+                                    <figure>
+                                        <figcaption>Hello</figcaption>
+                                        <p><a href="#"><span class="__cf_email__">{{user.first_name}}</span></a></p>
+                                    </figure>
+                                </div>
+                                <div class="ps-widget__content">
+                                    <ul>
+                                        <li><a href="{% url 'user_information' %}"><i class="icon-user"></i> Account Information</a></li>
+                                        <li class="active"><a href="#"><i class="icon-papers"></i> Invoices</a></li>
+                                        <li><a href="{% url 'address' %}"><i class="icon-map-marker"></i> Address</a></li>
+                                        <li><a href="{% url 'logout' %}"><i class="icon-power-switch"></i>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="ps-section__right">
+                            <div class="ps-section--account-setting">
+                                <div class="ps-section__header">
+                                    <h3>Invoices</h3>
+                                </div>
+                                <div class="ps-section__content">
+                                    <div class="table-responsive">
+                                        <table class="table ps-table ps-table--invoices">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Title</th>
+                                                    <th>Date</th>
+                                                    <th>Status</th>
+                                                    <th>Quantity</th>                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for i in order_history reversed %}
+                                                <tr>
+                                                    <td>{{ i.id }}</td>
+                                                    <td><a href="{% url 'product_details' i.product_id.id %}">{{ i.product_id.medicinename }}</a></td>
+                                                    <td>{{ i.date_ordered }}</td>
+                                                    <td>{{ i.status }}</td>
+                                                    <td>{{ i.quantity }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="ps-breadcrumb">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li><a href="index.html"></a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    {% endblock mainblock %}

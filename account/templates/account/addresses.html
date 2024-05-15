@@ -1,0 +1,119 @@
+{% extends "main/test.html" %}
+{% load static %}
+
+{% block title %} User Information {% endblock title %}
+
+{% block mainblock %}
+    <main class="ps-page--my-account">
+        <div class="ps-breadcrumb">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="user-information.html">Account</a></li>
+                    <li>Addresses</li>
+                </ul>
+            </div>
+        </div>
+
+        <section class="ps-section--account">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="ps-section__left">
+                            <aside class="ps-widget--account-dashboard">
+                                <div class="ps-widget__header"><img src="img/users/3.jpg" alt="">
+                                    <figure>
+                                        <figcaption>Hello</figcaption>
+                                        <p><a href="#"><span class="__cf_email__">{{ user.email }}</span></a></p>
+                                    </figure>
+                                </div>
+                                <div class="ps-widget__content">
+                                    <ul>
+                                        <li><a href="{% url 'user_information' %}"><i class="icon-user"></i> Account Information</a></li>
+                                        <li><a href="{% url 'invoices' %}"><i class="icon-papers"></i> Invoices</a></li>
+                                        <li class="active"><a href="#"><i class="icon-map-marker"></i> Address</a></li>
+                                        <li><a href="{% url 'logout' %}"><i class="icon-power-switch"></i>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="ps-section__right">
+                            <form class="ps-form--account-setting" action="{% url 'edit_address' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="ps-form__header">
+                                    <h3> User Address</h3>
+                                </div>
+                                <div class="ps-form__content">
+                                    <!-- <div class="form-group">
+                                        <label>Name</label>
+                                        <input class="form-control" type="text" placeholder="Please enter your name...">
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+
+                                            <div class="form-group">
+                                                <label>Address 1*</label>
+                                                {% if user.profile.address1 == "Null" %}
+                                                    <input class="form-control" type="text" placeholder="Please provide your address" name = "address1">
+                                                {% else %}
+                                                    <input class="form-control" type="text" placeholder="{{ user.profile.address1 }}" name = "address1">
+                                                {% endif %}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Pincode 1*</label>
+                                                {% if user.profile.pincode1 == "Null" %}
+                                                    <input class="form-control" type="text" placeholder="Please provide your Pincode" name = "Pincode1">
+                                                {% else %}
+                                                    <input class="form-control" type="text" placeholder="{{ user.profile.pincode1 }}" name = "Pincode1">
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Address 2</label>
+                                                {% if user.profile.address2 == "Null" %}
+                                                    <input class="form-control" type="text" placeholder="Please provide your second address" name = "address2">
+                                                {% else %}
+                                                    <input class="form-control" type="text" placeholder="{{ user.profile.address2 }}" name = "address2">
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Pincode 2</label>
+                                                {% if user.profile.pincode2 == "Null" %}
+                                                    <input class="form-control" type="text" placeholder="Please provide your second pincode" name = "pincode2">
+                                                {% else %}
+                                                    <input class="form-control" type="text" placeholder="{{ user.profile.pincode2 }}" name = "pincode2">
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group submit">
+                                    <button type="submit" class="ps-btn">Update</button>
+                                </div>
+                                {% for message in messages %}
+                                    {{ message }}
+                                {% endfor %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="ps-breadcrumb">
+            <div class="container">
+                <ul class="breadcrumb">
+                </ul>
+            </div>
+        </div>
+    </main>
+{% endblock mainblock %}

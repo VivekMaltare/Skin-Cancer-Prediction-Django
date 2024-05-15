@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Login </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+
+	
+</head>
+<body>
+    <!-- ? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'assets/img/logo/loder.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start-->
+
+
+    <main class="login-body" data-vide-bg="{% static 'assets/img/login-bg.mp4' %}">
+        <!-- Login Admin -->
+        <form class="form-default" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="login-form">
+                <!-- logo-login -->
+                <div class="logo-login">
+                    <a href="index.html"><img src="{% static 'assets/img/logo/loder.png' %}" alt=""></a>
+                </div>
+                <h2>Login Here</h2>
+                <center>
+                <p>
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </p>
+                </center>
+                <div class="form-input">
+                    <label for="name">Email</label>
+                    <input  type="email" name="email" placeholder="Email">
+                </div>
+                <div class="form-input">
+                    <label for="name">Password</label>
+                    <input type="password" name="pass2" placeholder="Password">
+                </div>
+                <div class="form-input pt-30">
+                    <input type="submit" name="submit" value="login">
+                </div>
+                
+                <!-- Forget Password -->
+                <a href="#" class="forget">Forget Password</a>
+                <!-- Forget Password -->
+                <a href="{% url 'signup' %}" class="registration">Registration</a>
+                <a href="/" class="forget">Back to home</a>
+            </div>
+        </form>
+        <!-- /end login form -->
+    </main>
+
+
+  
+    </body>
+</html>
