@@ -22,6 +22,14 @@ loaded_model.load_weights(file_path2)
 print("Loaded model from disk1")
 # Create your views here.
 
+import logging
+
+try:
+    # Get the logger named 'django'
+    logger = logging.getLogger('django')
+    print("Logger loaded successfully")
+except Exception as e:
+    print(f"Error loading logger: {e}")
 
 def home(request):
     print(BASE_DIR)
@@ -31,6 +39,7 @@ def home(request):
     return render(request,'classifier/index.html', context)
 
 def predictImage(request):
+    logger.info("predictImage view called")
     if request.method=='POST':
         propic = request.FILES['filePath']
        # fs=FileSystemStorage()

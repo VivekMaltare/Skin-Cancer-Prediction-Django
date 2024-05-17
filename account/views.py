@@ -5,8 +5,18 @@ from django.contrib import messages
 
 from django.core.mail import send_mail
 
+import logging
+
+try:
+    # Get the logger named 'django'
+    logger = logging.getLogger('django')
+    print("Logger loaded successfully")
+except Exception as e:
+    print(f"Error loading logger: {e}")
+
 # Create your views here.
 def login(request):
+    logger.info("Login Request")
     user = request.user
     if user.is_authenticated:
         return redirect('home')
@@ -30,6 +40,7 @@ def logout(request):
     return redirect('/')
 
 def signup(request):
+    logger.info("Register Request")
     user = request.user
     if user.is_authenticated:
         return redirect('home')
