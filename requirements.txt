@@ -81,3 +81,5 @@ wincertstore==0.2
 wrapt
 yarl
 zipp
+python-logstash
+elasticsearch-dsl
