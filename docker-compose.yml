@@ -1,4 +1,35 @@
-#version: '3'
+# #version: '3'
+
+# services:
+#   django:
+#     image: vivekmaltare/spe_major_project:latest  # Specify your existing image from Docker Hub
+#     command: python3 manage.py runserver 0.0.0.0:8000
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - elasticsearch
+#       - logstash
+#     environment:
+#       - DJANGO_SETTINGS_MODULE=proj.settings
+      
+#   elasticsearch:
+#     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+#     environment:
+#       - discovery.type=single-node
+
+#   logstash:
+#     image: docker.elastic.co/logstash/logstash:7.10.2
+#     volumes:
+#       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+#     command: logstash -f /usr/share/logstash/pipeline/logstash.conf
+
+#   kibana:
+#     image: docker.elastic.co/kibana/kibana:7.10.2
+#     ports:
+#       - "5601:5601"
+#     depends_on:
+#       - elasticsearch
+version: '3'
 
 services:
   django:
@@ -16,12 +47,18 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
     environment:
       - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
 
   logstash:
     image: docker.elastic.co/logstash/logstash:7.10.2
     volumes:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     command: logstash -f /usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "5000:5000"
+      - "9600:9600"
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.10.2
