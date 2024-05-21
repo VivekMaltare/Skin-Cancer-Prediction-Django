@@ -27,9 +27,11 @@ def login(request):
         
         user = auth.authenticate(username = email,password = password)
         if user is not None:
+            logger.info("login successful")
             auth.login(request,user)
             return redirect('/')
         else:
+            logger.info("invalid credentials")
             messages.info(request,'Invalid Credentials *_*')
             return render(request,'account/login,register.html')
     else:
@@ -50,9 +52,11 @@ def signup(request):
         last_name = request.POST['last_name']
         username = request.POST['email']
         if User.objects.filter(username = username).exists():
+            logger.info("email already exists")
             messages.info(request,'An Account with this email already exist *_*')
             return render(request,'account/login,register.html')
         if len(username)==0:
+            logger.info("email not entered")
             messages.info(request,'Email-address not entered *_*')
             return render(request,'account/login,register.html')
         
@@ -74,7 +78,7 @@ def signup(request):
         #     fail_silently=False,
         # )
 
-        
+        logger.info("login successful")
         return render(request,'account/login,register.html')
     else:
         return render(request,'account/login,register.html')
