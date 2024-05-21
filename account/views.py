@@ -78,7 +78,7 @@ def signup(request):
         #     fail_silently=False,
         # )
 
-        logger.info("login successful")
+        logger.info("registration successful")
         return render(request,'account/login,register.html')
     else:
         return render(request,'account/login,register.html')
