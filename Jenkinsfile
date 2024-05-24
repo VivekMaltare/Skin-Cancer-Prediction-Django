@@ -6,6 +6,16 @@ pipeline {
     }
 
     stages {
+        stage('Activate Conda Environment') {
+            steps {
+                script {
+                    // Activate Conda environment
+                    sh 'conda activate SPEproject'
+                }
+            }
+        }
+        // Add more stages as needed
+    }
         stage('Run Tests') {
             steps {
                 script {
