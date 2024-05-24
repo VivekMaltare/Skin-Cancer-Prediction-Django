@@ -14,8 +14,6 @@ pipeline {
                 }
             }
         }
-        // Add more stages as needed
-    }
         stage('Run Tests') {
             steps {
                 script {
