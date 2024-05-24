@@ -22,20 +22,6 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Activate Virtual Environment and Run Tests') {
-            steps {
-                script {
-                    // Assuming you are on a Unix-like system
-                    sh '''
-                        # Activate virtual environment
-                        source SPEproject/bin/activate
-                        
-                        # Run tests
-                       python3 manage.py test
-                    '''
-                }
-            }
-        }
         // stage('Run Tests') {
         //     steps {
         //         script {
