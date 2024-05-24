@@ -6,6 +6,14 @@ pipeline {
     }
 
     stages {
+        stage('Initialize Conda') {
+            steps {
+                script {
+                    // Initialize Conda if not already initialized
+                    sh 'conda init --all'
+                }
+            }
+        }
         stage('Activate Conda Environment') {
             steps {
                 script {
