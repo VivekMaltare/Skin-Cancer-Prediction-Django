@@ -28,7 +28,7 @@ pipeline {
                     // Assuming you are on a Unix-like system
                     sh '''
                         # Activate virtual environment
-                        source venv/bin/activate
+                        source SPEproject/bin/activate
                         
                         # Run tests
                        python3 manage.py test
