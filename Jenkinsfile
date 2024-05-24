@@ -6,10 +6,17 @@ pipeline {
     }
 
     stages {
-        stage('Checkout SCM') {
+        // stage('Checkout SCM') {
+        //     steps {
+        //         // Checkout the source code from the Git repository with credentials
+        //         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/VivekMaltare/Skin-Cancer-Prediction-Django.git']])
+        //     }
+        // }
+         stage('Debug User') {
             steps {
-                // Checkout the source code from the Git repository with credentials
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/VivekMaltare/Skin-Cancer-Prediction-Django.git']])
+                script {
+                    sh 'whoami'
+                }
             }
         }
         stage('Build docker image'){
@@ -64,19 +71,19 @@ pipeline {
                 }
             }
         }
-        stage('Delay before stopping Minikube') {
-            steps {
-                script {
-                    sleep 1800 // Wait for 30 minutes (1800 seconds)
-                }
-            }
-        }
-        stage('Stop Minikube') {
-            steps {
-                script {
-                    sh 'minikube stop'
-                }
-            }
-        }
+        // stage('Delay before stopping Minikube') {
+        //     steps {
+        //         script {
+        //             sleep 1800 // Wait for 30 minutes (1800 seconds)
+        //         }
+        //     }
+        // }
+        // stage('Stop Minikube') {
+        //     steps {
+        //         script {
+        //             sh 'minikube stop'
+        //         }
+        //     }
+        // }
     }
 }
