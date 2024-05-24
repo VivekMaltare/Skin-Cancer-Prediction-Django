@@ -66,8 +66,3 @@ services:
       - "5601:5601"
     depends_on:
       - elasticsearch
-  django_tests:
-    image: vivekmaltare/spe_major_project:latest
-    command: python3 manage.py test  # Command to run Django tests
-    depends_on:
-      - django
