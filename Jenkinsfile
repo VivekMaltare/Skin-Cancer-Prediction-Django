@@ -6,13 +6,13 @@ pipeline {
     }
 
     stages {
-        // stage('Run Tests') {
-        //     steps {
-        //         script {
-        //             sh 'python manage.py test'
-        //         }
-        //     }
-        // }
+        stage('Run Tests') {
+            steps {
+                script {
+                    sh 'python3 manage.py test'
+                }
+            }
+        }
         stage('Build docker image'){
             steps{
                 script{
