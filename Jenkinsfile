@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     // Activate Conda environment
-                    sh 'conda activate SPEproject'
+                    sh '/home/vivek-maltare/anaconda3/bin/conda activate SPEproject'
                 }
             }
         }
