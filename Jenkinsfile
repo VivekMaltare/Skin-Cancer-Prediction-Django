@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     // Initialize Conda if not already initialized
-                    sh 'conda init --all'
+                    sh '/home/vivek-maltare/anaconda3/bin/conda init --all'
                 }
             }
         }
