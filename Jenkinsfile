@@ -1,18 +1,12 @@
 pipeline {
     agent any
-    
+
     environment {
         KUBECONFIG = '/home/vivek-maltare/.kube/config'
     }
 
     stages {
-        stage('Debug') {
-            steps {
-                sh 'whoami'
-                sh 'ls -l /home/vivek-maltare/.kube/config'
-            }
-        }
-        stage('Checkout') {
+        stage('Checkout SCM') {
             steps {
                 // Checkout the source code from the Git repository with credentials
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/VivekMaltare/Skin-Cancer-Prediction-Django.git']])
@@ -35,24 +29,31 @@ pipeline {
                 }
             }
         }
-        stage('Start Services') {
+        stage('Start docker-compose services') {
             steps {
                 script {
                     sh 'docker-compose -f docker-compose.yml up -d'
                 }
             }
         }
-        stage('Delay') {
+        stage('Delay before down') {
             steps {
                 script {
                     sleep 30 // Wait for 1 minute
                 }
             }
         }
-        stage('Stop Containers') {
+        stage('Stop docker-compose services') {
             steps {
                 script {
                     sh 'docker-compose -f docker-compose.yml down'
+                }
+            }
+        }
+        stage('Start Minikube') {
+            steps {
+                script {
+                    sh 'minikube start'
                 }
             }
         }
@@ -60,6 +61,20 @@ pipeline {
             steps {
                 script {
                     sh 'kubectl --kubeconfig=$KUBECONFIG apply -f k8s_resources/'
+                }
+            }
+        }
+        stage('Delay before stopping Minikube') {
+            steps {
+                script {
+                    sleep 1800 // Wait for 30 minutes (1800 seconds)
+                }
+            }
+        }
+        stage('Stop Minikube') {
+            steps {
+                script {
+                    sh 'minikube stop'
                 }
             }
         }
