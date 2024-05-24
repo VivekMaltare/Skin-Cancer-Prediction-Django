@@ -6,29 +6,13 @@ pipeline {
     }
 
     stages {
-        // stage('Initialize Conda') {
-        //     steps {
-        //         script {
-        //             // Initialize Conda if not already initialized
-        //             sh '/home/vivek-maltare/anaconda3/bin/conda init --all'
-        //         }
-        //     }
-        // }
-        // stage('Activate Conda Environment') {
-        //     steps {
-        //         script {
-        //             // Activate Conda environment
-        //             sh '/home/vivek-maltare/anaconda3/bin/conda activate SPEproject'
-        //         }
-        //     }
-        // }
-        // stage('Run Tests') {
-        //     steps {
-        //         script {
-        //             sh 'python3 manage.py test'
-        //         }
-        //     }
-        // }
+        stage('Run Tests') {
+            steps {
+                script {
+                    sh 'python3 manage.py test'
+                }
+            }
+        }
         stage('Build docker image'){
             steps{
                 script{
