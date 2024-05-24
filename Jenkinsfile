@@ -6,29 +6,43 @@ pipeline {
     }
 
     stages {
-        stage('Initialize Conda') {
+        // stage('Initialize Conda') {
+        //     steps {
+        //         script {
+        //             // Initialize Conda if not already initialized
+        //             sh '/home/vivek-maltare/anaconda3/bin/conda init --all'
+        //         }
+        //     }
+        // }
+        // stage('Activate Conda Environment') {
+        //     steps {
+        //         script {
+        //             // Activate Conda environment
+        //             sh '/home/vivek-maltare/anaconda3/bin/conda activate SPEproject'
+        //         }
+        //     }
+        // }
+        stage('Activate Virtual Environment and Run Tests') {
             steps {
                 script {
-                    // Initialize Conda if not already initialized
-                    sh '/home/vivek-maltare/anaconda3/bin/conda init --all'
+                    // Assuming you are on a Unix-like system
+                    sh '''
+                        # Activate virtual environment
+                        source venv/bin/activate
+                        
+                        # Run tests
+                       python3 manage.py test
+                    '''
                 }
             }
         }
-        stage('Activate Conda Environment') {
-            steps {
-                script {
-                    // Activate Conda environment
-                    sh '/home/vivek-maltare/anaconda3/bin/conda activate SPEproject'
-                }
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                script {
-                    sh 'python3 manage.py test'
-                }
-            }
-        }
+        // stage('Run Tests') {
+        //     steps {
+        //         script {
+        //             sh 'python3 manage.py test'
+        //         }
+        //     }
+        // }
         stage('Build docker image'){
             steps{
                 script{
