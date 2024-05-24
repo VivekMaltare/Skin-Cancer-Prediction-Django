@@ -60,7 +60,7 @@ pipeline {
         stage('Start Minikube') {
             steps {
                 script {
-                    sh 'minikube start'
+                    sh 'minikube start --kubeconfig=$KUBECONFIG'
                 }
             }
         }
