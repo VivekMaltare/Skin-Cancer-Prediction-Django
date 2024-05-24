@@ -1,5 +1,4 @@
 # #version: '3'
-
 # services:
 #   django:
 #     image: vivekmaltare/spe_major_project:latest  # Specify your existing image from Docker Hub
