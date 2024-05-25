@@ -1,4 +1,5 @@
 # #version: '3'
+
 # services:https://github.com/VivekMaltare/Skin-Cancer-Prediction-Django/edit/main/docker-compose.yml
 #   django:
 #     image: vivekmaltare/spe_major_project:latest  # Specify your existing image from Docker Hub
